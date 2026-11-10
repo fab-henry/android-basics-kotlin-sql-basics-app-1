@@ -43,11 +43,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun inicializarViews() {
-        etNome = findViewById(R.id.etTelefone)
+        etNome = findViewById(R.id.etNome)
         etTelefone = findViewById(R.id.etTelefone)
         etEmail = findViewById(R.id.etEmail)
         etSenha = findViewById(R.id.etSenha)
         btnSalvar = findViewById(R.id.btnSalvar)
+        btnLimpar = findViewById(R.id.btnLimpar)
 
         lvClientes = findViewById(R.id.lvClientes)
     }
@@ -60,7 +61,11 @@ class MainActivity : AppCompatActivity() {
         // Clique simples -> Preenche o formulário para EDITAR (Update)
 
 
-
+        lvClientes.setOnItemClickListener { _, _, position, _ ->
+            val cliente = listaClientes[position]
+            preencherCamposParaEdicao(cliente)
+            true
+        }
 
 
         // Clique longo -> Exibe confirmação para EXCLUIR (Delete)
@@ -73,6 +78,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun configurarBotoes() {
         btnSalvar.setOnClickListener { salvarOuAtualizar() }
+        btnLimpar.setOnClickListener { limparFormulario() }
 
     }
 
